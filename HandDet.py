@@ -2,14 +2,11 @@ import cv2
 import mediapipe as mp
 import numpy as np
 from PIL import Image
-# import torch
-# import HANDSIGN
 import time
 import os
 
-L = os.listdir("D:\\miniproject\\isl")
+L = os.listdir("D:\\foldername\")
 print(L)
-# det = HANDSIGN.HandSignDetector()
 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -44,16 +41,10 @@ def calc_bounding_rect(image, landmarks):
 
     return [x, y, x + w, y + h]
 
-# ret, frame = cam.read()
 
-# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-# with mp_face.FaceDetection(model_selection = 0) as face:
-
-#     results = face.process(img)
-
-c=21   #c=0
-i=8
+c=0   #filename starting
+i=0
 while True:
 
     ret,frame = cam.read()
@@ -77,7 +68,7 @@ while True:
             # im = np.array(im)q
             im = blank_img
             im = cv2.resize(im, (128,128))
-            #cv2.imwrite("D:\\F!L(5\\HANDSIGN_DATASET\\cropped_image.png",im)
+          
             # det.forward(im)
             
 
@@ -90,10 +81,10 @@ while True:
 
     if cv2.waitKey(1) == ord('s'):
         print(f"Saved to {L[i]}")
-        cv2.imwrite(f"D:\\miniproject\\isl\\{L[i]}\\{c}.jpg", blank_img)
+        cv2.imwrite(f"D:\\foldername\\{L[i]}\\{c}.jpg", blank_img)
         c+=1
-        if c > 40:#c>20
-            c=21 #c=0SS
+        if c > 20:# till c=20
+            c=0
             i+=1
             print(f"Now show {L[i]}")
     
@@ -106,16 +97,3 @@ while True:
 
 cam.release()
 cv2.destroyAllWindows()
-
-
-
-    
-
-
-'''
-image = cv2.imread("download.png")
-
-cv2.imshow("image",image)
-cv2.waitKey(0)
-
-'''
